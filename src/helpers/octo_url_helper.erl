@@ -1,7 +1,7 @@
 -module(octo_url_helper).
 -export([
   pull_request_url/2, pull_request_url/3, pull_request_commits_url/3,
-  pull_request_comments_url/3,
+  pull_request_comments_url/3, get_archive_link/4,
   pull_request_files_url/3, pull_request_merged_url/3, merge_pull_request_url/3
 ]).
 -export([
@@ -10,6 +10,9 @@
 
 repo_url(Owner, Repo) ->
   "https://api.github.com/repos/" ++ Owner ++ "/" ++ Repo.
+
+get_archive_link(Owner, Repo, Format, Ref) ->
+  repo_url(Owner, Repo) ++ "/"++Format++"/"++Ref.
 
 pull_request_url(Owner, Repo) ->
   repo_url(Owner, Repo) ++ "/pulls".

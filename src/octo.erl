@@ -25,6 +25,10 @@
 ]).
 
 -export([
+    get_archive_link/2, get_archive_link/3, get_archive_link/4, get_archive_link/5
+]).
+
+-export([
   list_references/2, list_references/3,
   list_branches/2, list_branches/3,
   list_tags/2, list_tags/3,
@@ -64,10 +68,18 @@ update_pull_request(User, Repo, Number, Payload, Options) -> exec(octo_pull_requ
 merge_pull_request(User, Repo, Number) -> merge_pull_request(User, Repo, Number, []).
 merge_pull_request(User, Repo, Number, Options) -> exec(octo_pull_request, merge, [User, Repo, Number, Options]).
 
-%%% Pull Requests
+%%% Pull Requests Comments
 
 create_pull_request_comment(User, Repo, Number, Payload) -> create_pull_request_comment(User, Repo, Number, Payload, []).
 create_pull_request_comment(User, Repo, Number, Payload, Options) -> exec(octo_pull_request_comment, create, [User, Repo, Number, Payload, Options]).
+
+
+%%% Repos Contents
+
+get_archive_link(User, Repo) -> get_archive_link(User, Repo, []).
+get_archive_link(User, Repo, Options) -> get_archive_link(User, Repo, "tarball", Options).
+get_archive_link(User, Repo, Format, Options) -> get_archive_link(User, Repo, Format, "master", Options).
+get_archive_link(User, Repo, Format, Ref, Options) -> exec(octo_repo_contents, get_archive_link, [User, Repo, Format, Ref, Options]).
 
 %%% References
 

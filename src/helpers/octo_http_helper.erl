@@ -1,8 +1,13 @@
 -module(octo_http_helper).
 -export([
-  get/2, delete/2, post/3, patch/3, read_collection/3, get_response_status_code/2,
+  get/2, get_headers/2, delete/2, post/3, patch/3, read_collection/3, get_response_status_code/2,
   options_to_query_params/1, put/3
 ]).
+
+
+get_headers(Url, Headers) ->
+  {ok, StatusCode, RespHeaders, _ClientRef} = do_request(get, Url, Headers),
+  {ok, RespHeaders}.
 
 get(Url, Headers) ->
   {ok, StatusCode, _RespHeaders, ClientRef} = do_request(get, Url, Headers),
