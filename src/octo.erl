@@ -14,6 +14,17 @@
 ]).
 
 -export([
+%%  list_pull_requests/2, list_pull_requests/3,
+%%  read_pull_request/3, read_pull_request/4,
+%%  list_pull_request_commits/3, list_pull_request_commits/4,
+%%  list_pull_request_files/3, list_pull_request_files/4,
+%%  is_pull_request_merged/3, is_pull_request_merged/4,
+  create_pull_request_comment/4, create_pull_request_comment/5
+%%  update_pull_request/4, update_pull_request/5,
+%%  merge_pull_request/3, merge_pull_request/4
+]).
+
+-export([
   list_references/2, list_references/3,
   list_branches/2, list_branches/3,
   list_tags/2, list_tags/3,
@@ -52,6 +63,11 @@ update_pull_request(User, Repo, Number, Payload, Options) -> exec(octo_pull_requ
 
 merge_pull_request(User, Repo, Number) -> merge_pull_request(User, Repo, Number, []).
 merge_pull_request(User, Repo, Number, Options) -> exec(octo_pull_request, merge, [User, Repo, Number, Options]).
+
+%%% Pull Requests
+
+create_pull_request_comment(User, Repo, Number, Payload) -> create_pull_request_comment(User, Repo, Number, Payload, []).
+create_pull_request_comment(User, Repo, Number, Payload, Options) -> exec(octo_pull_request_comment, create, [User, Repo, Number, Payload, Options]).
 
 %%% References
 
